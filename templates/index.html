@@ -10,35 +10,48 @@
 
     <header>
     <div class="informacoes">
-    <h1>SASHIMI NOKU</h1>
-    <p>Um autêntico restaurante japonês combina a delicadeza da culinária oriental com um ambiente minimalista e acolhedor. No cardápio, destacam-se sushis, sashimis e temakis sempre frescos, preparados com cortes precisos, além de pratos quentes tradicionais como guiozas e yakisoba, proporcionando uma experiência gastronômica leve e saborosa.</p>   
+    
+        <h1>SASHIMI NOKU</h1>
+    
+        <p>Um autêntico restaurante japonês combina a delicadeza da culinária oriental com um ambiente minimalista e acolhedor. No cardápio, destacam-se sushis, sashimis e temakis sempre frescos, preparados com cortes precisos, além de pratos quentes tradicionais como guiozas e yakisoba, proporcionando uma experiência gastronômica leve e saborosa.</p>   
+    
     </div>
     
     <div class="carrinho">
-       <span>
-    Carrinho(0)
-        </span>
+       
+        <span> Carrinho(0) </span>
+    
     </div>
-    </header>  
-    <main>
     
-   <h2>Nosso Cardápio</h2>
+</header>  
+<main>
+    
+   <h2> Nosso Cardápio </h2>
    
-   <div>
-   <h3>
-    BARCA NOKU
-   </h3>
-   <p>
-    Seleção de sushi e sashimi frescos, ideal para 2 pessoas.
-   </p> 
+   <div class="produto">
     
-   <p>
-    60R$
-    </p>
-<img src="caminho-da-imagem" alt="descrição da imagem">
-<!-- Comentário: adicionar imagem da BARCA aqui -->
+    <div class="imagem-produto"> 
+    <img src="{{ url_for('static', filename='img/barca-noku.jpg') }}" alt="Barca Noku">
+    </div>     
+
+    <div class="informacoes-produto">
+    
+    <h3> BARCA NOKU </h3>
+    <p> Seleção de sushi e sashimi frescos, ideal para 2 pessoas. </p> 
+    <p>  R$ 60,00 </p> </div>
+    <div class="quantidade-produto"> 
+
+        <button id="diminuir">-</button>
+
+        <span id="quantidade">0</span>
+
+        <button id="aumentar">+</button>
+
+</div>
+
 </div> 
     </main>
 
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

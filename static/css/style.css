@@ -30,3 +30,7 @@ header {
     padding: 10px 18px;
     border-radius: 8px;
 }
+
+.imagem-produto img {
+    width: 250px;
+}
