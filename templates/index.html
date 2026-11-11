@@ -19,38 +19,303 @@
     
     <div class="carrinho">
        
-        <span> Carrinho(0) </span>
+        <span id="total-carrinho">Carrinho (0) </span>
     
     </div>
     
 </header>  
+
 <main>
-    
-   <h2> Nosso Cardápio </h2>
-   
-   <div class="produto">
-    
-    <div class="imagem-produto"> 
-    <img src="{{ url_for('static', filename='img/barca-noku.jpg') }}" alt="Barca Noku">
-    </div>     
 
-    <div class="informacoes-produto">
-    
-    <h3> BARCA NOKU </h3>
-    <p> Seleção de sushi e sashimi frescos, ideal para 2 pessoas. </p> 
-    <p>  R$ 60,00 </p> </div>
-    <div class="quantidade-produto"> 
+    <h2>Nosso Cardápio</h2>
 
-        <button id="diminuir">-</button>
+    <!-- Produto 1: Barca Noku -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/barca-noku.jpg') }}" alt="Barca Noku">
+        </div>
 
-        <span id="quantidade">0</span>
+        <div class="informacoes-produto">
+            <h3>BARCA NOKU</h3>
+            <p>Seleção de sushi e sashimi frescos, ideal para 2 pessoas.</p>
+            <p>R$ 60,00</p>
+        </div>
 
-        <button id="aumentar">+</button>
+        <div class="quantidade-produto">
+            <button id="diminuir">-</button>
+            <span id="quantidade">0</span>
+            <button id="aumentar">+</button>
+        </div>
+    </div>
 
-</div>
+    <!-- Produto 2: Combinado Tradicional -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/sushi-sashimi.jpg') }}" alt="Combinado Tradicional">
+        </div>
 
-</div> 
-    </main>
+        <div class="informacoes-produto">
+            <h3>COMBINADO TRADICIONAL</h3>
+            <p>Seleção tradicional de sushi e sashimi.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-2">-</button>
+            <span id="quantidade-2">0</span>
+            <button id="aumentar-2">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 3: Sashimi de Salmão -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/sashimi-de-salmao.jfif') }}" alt="Sashimi de Salmão">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>SASHIMI DE SALMÃO</h3>
+            <p>Fatias frescas de salmão, preparadas cuidadosamente.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-3">-</button>
+            <span id="quantidade-3">0</span>
+            <button id="aumentar-3">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 4: Temaki de Salmão -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/temaki-de-salmao.jpg') }}" alt="Temaki de Salmão">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>TEMAKI DE SALMÃO</h3>
+            <p>Temaki recheado com salmão e ingredientes frescos.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-4">-</button>
+            <span id="quantidade-4">0</span>
+            <button id="aumentar-4">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 5: Hot Roll Philadelphia -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/hot-roll-filadelfia.jfif') }}" alt="Hot Roll Philadelphia">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>HOT ROLL PHILADELPHIA</h3>
+            <p>Enrolado empanado e crocante com recheio especial.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-5">-</button>
+            <span id="quantidade-5">0</span>
+            <button id="aumentar-5">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 6: Uramaki Califórnia -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/uramaki-california.jpg') }}" alt="Uramaki Califórnia">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>URAMAKI CALIFÓRNIA</h3>
+            <p>Uramaki com combinação de ingredientes tradicionais.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-6">-</button>
+            <span id="quantidade-6">0</span>
+            <button id="aumentar-6">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 7: Nigiri de Atum -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/nigiri-de-atum.jfif') }}" alt="Nigiri de Atum">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>NIGIRI DE ATUM</h3>
+            <p>Fatia de atum fresco sobre arroz japonês temperado.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-7">-</button>
+            <span id="quantidade-7">0</span>
+            <button id="aumentar-7">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 8: Gyoza de Porco -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/gyoza-de-porco.jfif') }}" alt="Gyoza de Porco">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>GYOZA DE PORCO</h3>
+            <p>Pastéis japoneses recheados com carne suína.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-8">-</button>
+            <span id="quantidade-8">0</span>
+            <button id="aumentar-8">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 9: Tempura de Camarão -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/tempura-de-camarao.jfif') }}" alt="Tempura de Camarão">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>TEMPURA DE CAMARÃO</h3>
+            <p>Camarões empanados em uma massa leve e crocante.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-9">-</button>
+            <span id="quantidade-9">0</span>
+            <button id="aumentar-9">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 10: Yakissoba de Frango -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/yakissoba-de-frango.jfif') }}" alt="Yakissoba de Frango">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>YAKISSOBA DE FRANGO</h3>
+            <p>Macarrão oriental com frango e legumes ao molho especial.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-10">-</button>
+            <span id="quantidade-10">0</span>
+            <button id="aumentar-10">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 11: Lamen Shoyu -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/lamen-shoyu.jfif') }}" alt="Lamen Shoyu">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>LAMEN SHOYU</h3>
+            <p>Macarrão japonês servido em caldo à base de shoyu.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-11">-</button>
+            <span id="quantidade-11">0</span>
+            <button id="aumentar-11">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 12: Missoshiro -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/missoshiro.jfif') }}" alt="Missoshiro">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>MISSOSHIRO</h3>
+            <p>Sopa japonesa tradicional à base de missô.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-12">-</button>
+            <span id="quantidade-12">0</span>
+            <button id="aumentar-12">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 13: Nigiri de Salmão -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/nigiri-de-salmao.jfif') }}" alt="Nigiri de Salmão">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>NIGIRI DE SALMÃO</h3>
+            <p>Fatia de salmão fresco sobre arroz japonês temperado.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-13">-</button>
+            <span id="quantidade-13">0</span>
+            <button id="aumentar-13">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 14: Shimeji na Manteiga -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/shimeji-na-manteiga.jfif') }}" alt="Shimeji na Manteiga">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>SHIMEJI NA MANTEIGA</h3>
+            <p>Cogumelos shimeji preparados na manteiga.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-14">-</button>
+            <span id="quantidade-14">0</span>
+            <button id="aumentar-14">+</button>
+        </div>
+    </div>
+
+    <!-- Produto 15: Mochi de Chá Verde -->
+    <div class="produto">
+        <div class="imagem-produto">
+            <img src="{{ url_for('static', filename='img/mochi-de-cha-verde.jfif') }}" alt="Mochi de Chá Verde">
+        </div>
+
+        <div class="informacoes-produto">
+            <h3>MOCHI DE CHÁ VERDE</h3>
+            <p>Doce japonês tradicional com sabor de chá verde.</p>
+            <p>R$ 0,00</p>
+        </div>
+
+        <div class="quantidade-produto">
+            <button id="diminuir-15">-</button>
+            <span id="quantidade-15">0</span>
+            <button id="aumentar-15">+</button>
+        </div>
+    </div>
+
+</main>
+
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
