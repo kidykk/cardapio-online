@@ -41,11 +41,31 @@
             <p>R$ 60,00</p>
         </div>
 
-        <div class="quantidade-produto">
-            <button id="diminuir">-</button>
-            <span id="quantidade">0</span>
-            <button id="aumentar">+</button>
-        </div>
+       
+<!-- Área de compra do produto -->
+<div class="quantidade-produto">
+
+    <!-- Botão inicial para adicionar ao carrinho -->
+    <button class="botao-adicionar" id="adicionar-1">
+        <span>🛒</span>
+        ADICIONAR
+    </button>
+
+    <!-- Controles que serão exibidos após adicionar o produto -->
+    <div class="controles-quantidade" id="controles-1" style="display: none;">
+
+        <button class="botao-quantidade">-</button>
+
+        <button class="botao-carrinho">
+            🛒
+        </button>
+
+        <button class="botao-quantidade">+</button>
+
+    </div>
+
+</div>
+
     </div>
 
     <!-- Produto 2: Combinado Tradicional -->
@@ -108,7 +128,7 @@
     <!-- Produto 5: Hot Roll Philadelphia -->
     <div class="produto">
         <div class="imagem-produto">
-            <img src="{{ url_for('static', filename='img/hot-roll-filadelfia.jfif') }}" alt="Hot Roll Philadelphia">
+            <img src="{{ url_for('static', filename='img/hot-roll-philadelphia.jfif') }}" alt="Hot Roll Philadelphia">
         </div>
 
         <div class="informacoes-produto">
