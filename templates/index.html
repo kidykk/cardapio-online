@@ -18,10 +18,13 @@
     </div>
     
     <div class="carrinho">
-       
-        <span id="total-carrinho">Carrinho (0) </span>
-    
-    </div>
+    <button id="but" class="btn-carrinho-topo">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.60 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <span id="total-carrinho">Carrinho (0)</span>
+    </button>
+</div>
     
 </header>  
 
@@ -44,12 +47,15 @@
        
 <!-- Área de compra do produto -->
 <div class="quantidade-produto">
-
-    <!-- Botão inicial para adicionar ao carrinho -->
     <button class="botao-adicionar" id="adicionar-1">
-        <span>🛒</span>
-        ADICIONAR
+        <span>🛒</span> ADICIONAR
     </button>
+    <div class="controles-quantidade" id="controles-1" style="display: none;">
+        <button class="botao-quantidade" id="diminuir-1">-</button>
+        <span id="quantidade-1" style="margin: 0 8px; font-weight: bold;">0</span>
+        <button class="botao-quantidade" id="aumentar-1">+</button>
+    </div>
+</div>
 
     <!-- Controles que serão exibidos após adicionar o produto -->
     <div class="controles-quantidade" id="controles-1" style="display: none;">
@@ -338,5 +344,67 @@
 
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- MODAL DE CARRINHO E CHECKOUT -->
+<div id="modal-carrinho" class="modal oculto">
+    <div class="modal-conteudo">
+        <button class="fechar-btn" id="btn-fechar">&times;</button>
+
+        <div id="passo-carrinho">
+            <h2>Seu Pedido</h2>
+            <div id="lista-produtos" style="max-height: 260px; overflow-y: auto;"></div>
+
+            <div class="total-container">
+                <strong>Total: R$ <span id="valor-total">0,00</span></strong>
+            </div>
+
+            <button id="btn-confirmar" class="btn-verde">Confirmar compra</button>
+        </div>
+
+        <div id="passo-pagamento" class="oculto">
+            <h2>Forma de Pagamento</h2>
+            
+            <div class="opcoes-pagamento">
+                <label class="opcao-pagamento">
+                    <input type="radio" name="pagamento" value="pix">
+                    <div class="icone-pagamento">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12.5 2.5a1 1 0 0 0-1 0l-7 4a1 1 0 0 0-.5.8v8.4a1 1 0 0 0 .5.8l7 4a1 1 0 0 0 1 0l7-4a1 1 0 0 0 .5-.8V7.3a1 1 0 0 0-.5-.8l-7-4zM6 7.8l6-3.4 6 3.4-6 3.4-6-3.4zm1 4.7l5 2.8v5.6l-5-2.8v-5.6zm10 0v5.6l-5 2.8v-5.6l5-2.8z"/>
+                        </svg>
+                    </div>
+                    <span>Pix</span>
+                </label>
+
+                <label class="opcao-pagamento">
+                    <input type="radio" name="pagamento" value="credito">
+                    <div class="icone-pagamento">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                        </svg>
+                    </div>
+                    <span>Cartão de Crédito</span>
+                </label>
+
+                <label class="opcao-pagamento">
+                    <input type="radio" name="pagamento" value="debito">
+                    <div class="icone-pagamento">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                        </svg>
+                    </div>
+                    <span>Cartão de Débito</span>
+                </label>
+            </div>
+
+            <button id="btn-finalizar" class="btn-verde oculto" style="margin-top: 15px;">Finalizar Compra</button>
+            <button id="btn-voltar" class="btn-secundario" style="margin-top: 10px;">Voltar ao Carrinho</button>
+        </div>
+
+        <div id="passo-sucesso" class="oculto">
+            <div id="conteudo-sucesso"></div>
+            <button id="btn-fechar-final" class="btn-verde" style="margin-top: 15px;">Concluir</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,41 +1,274 @@
+document.addEventListener("DOMContentLoaded", () => {
+ 
+  let carrinho = [];
 
-// Seleciona o elemento que exibe a quantidade de produtos
-const quantidade = document.getElementById("quantidade");
+  const btnAbrirModal = document.getElementById("but");
+  const totalCarrinhoTopo = document.getElementById("total-carrinho");
+  const modal = document.getElementById("modal-carrinho");
+  const btnFechar = document.getElementById("btn-fechar");
+  const listaProdutosModal = document.getElementById("lista-produtos");
+  const valorTotalEl = document.getElementById("valor-total");
 
-// Seleciona o indicador do carrinho no cabeçalho
-const carrinho = document.getElementById("total-carrinho");
+  const passoCarrinho = document.getElementById("passo-carrinho");
+  const passoPagamento = document.getElementById("passo-pagamento");
+  const passoSucesso = document.getElementById("passo-sucesso");
 
-// Função responsável por atualizar o indicador do carrinho
-function atualizarCarrinho() {
-    // Obtém a quantidade atual selecionada no produto
-    const valorAtual = Number(quantidade.textContent);
+  const btnConfirmar = document.getElementById("btn-confirmar");
+  const btnVoltar = document.getElementById("btn-voltar");
+  const btnFinalizar = document.getElementById("btn-finalizar");
+  const btnFecharFinal = document.getElementById("btn-fechar-final");
 
-    // Atualiza o texto exibido no cabeçalho
-    carrinho.textContent = `Carrinho (${valorAtual})`;
-}
+  const radiosPagamento = document.querySelectorAll('input[name="pagamento"]');
+  const conteudoSucesso = document.getElementById("conteudo-sucesso");
+  let timerInterval = null;
+  let formaEscolhida = "";
 
-// Botão para adicionar uma unidade ao produto
-document.getElementById("aumentar").addEventListener("click", function() {
+  const cardsProdutos = document.querySelectorAll(".produto");
+  const catalogo = [];
 
-    // Recupera a quantidade atual e adiciona uma unidade
-    const valorAtual = Number(quantidade.textContent);
-    quantidade.textContent = valorAtual + 1;
+  cardsProdutos.forEach((card, index) => {
+    const id = index + 1; // Produtos de 1 a 15
+    const nome = card.querySelector("h3").textContent.trim();
+    
+    const paragrafos = card.querySelectorAll(".informacoes-produto p");
+    const textoPreco = paragrafos[paragrafos.length - 1].textContent;
+    const preco = parseFloat(textoPreco.replace("R$", "").replace(".", "").replace(",", ".").trim()) || 0;
 
-    // Atualiza o indicador do carrinho
-    atualizarCarrinho();
-});
+    catalogo.push({ id, nome, preco });
 
-// Botão para remover uma unidade do produto
-document.getElementById("diminuir").addEventListener("click", function() {
+    const btnAdicionar1 = document.getElementById(`adicionar-${id}`);
+    const btnAumentar = document.getElementById(`aumentar-${id}`);
+    const btnDiminuir = document.getElementById(`diminuir-${id}`);
 
-    // Recupera a quantidade atual
-    const valorAtual = Number(quantidade.textContent);
+    if (btnAdicionar1) {
+      btnAdicionar1.addEventListener("click", () => atualizarQuantidadeProduto(id, 1));
+    }
+    if (btnAumentar) {
+      btnAumentar.addEventListener("click", () => atualizarQuantidadeProduto(id, 1));
+    }
+    if (btnDiminuir) {
+      btnDiminuir.addEventListener("click", () => atualizarQuantidadeProduto(id, -1));
+    }
+  });
 
-    // Verifica se a quantidade é maior que zero antes de remover
-    if (valorAtual > 0) {
-        quantidade.textContent = valorAtual - 1;
+  function atualizarQuantidadeProduto(id, delta) {
+    const prodCatalogo = catalogo.find(p => p.id === id);
+    if (!prodCatalogo) return;
+
+    let itemCarrinho = carrinho.find(item => item.id === id);
+
+    if (itemCarrinho) {
+      itemCarrinho.qtd += delta;
+      if (itemCarrinho.qtd <= 0) {
+        carrinho = carrinho.filter(item => item.id !== id);
+      }
+    } else if (delta > 0) {
+      carrinho.push({
+        id: prodCatalogo.id,
+        nome: prodCatalogo.nome,
+        preco: prodCatalogo.preco,
+        qtd: delta
+      });
     }
 
-    // Atualiza o indicador do carrinho
-    atualizarCarrinho();
+    sincronizarInterface();
+  }
+
+  function sincronizarInterface() {
+    catalogo.forEach(prod => {
+      const item = carrinho.find(i => i.id === prod.id);
+      const qtdAtual = item ? item.qtd : 0;
+
+      const spanQtd = document.getElementById(`quantidade-${prod.id}`);
+      if (spanQtd) spanQtd.textContent = qtdAtual;
+
+      if (prod.id === 1) {
+        const btnAdd1 = document.getElementById("adicionar-1");
+        const controles1 = document.getElementById("controles-1");
+        if (btnAdd1 && controles1) {
+          if (qtdAtual > 0) {
+            btnAdd1.style.display = "none";
+            controles1.style.display = "inline-flex";
+          } else {
+            btnAdd1.style.display = "inline-flex";
+            controles1.style.display = "none";
+          }
+        }
+      }
+    });
+
+    const totalItens = carrinho.reduce((acc, item) => acc + item.qtd, 0);
+    if (totalCarrinhoTopo) {
+      totalCarrinhoTopo.textContent = `Carrinho (${totalItens})`;
+    }
+
+    renderizarModalCarrinho();
+  }
+
+  function renderizarModalCarrinho() {
+    listaProdutosModal.innerHTML = "";
+    let totalPreco = 0;
+
+    if (carrinho.length === 0) {
+      listaProdutosModal.innerHTML = `<p style="text-align:center; color:#64748b; padding: 20px 0; font-size:14px;">Seu carrinho está vazio.</p>`;
+      valorTotalEl.textContent = "0,00";
+      return;
+    }
+
+    carrinho.forEach(item => {
+      totalPreco += item.preco * item.qtd;
+
+      const div = document.createElement("div");
+      div.classList.add("item-carrinho");
+      div.innerHTML = `
+        <div>
+          <span>${item.nome}</span><br>
+          <small>R$ ${item.preco.toFixed(2).replace(".", ",")}</small>
+        </div>
+        <div class="controles">
+          <button onclick="alterarQtdModal(${item.id}, -1)">-</button>
+          <span>${item.qtd}</span>
+          <button onclick="alterarQtdModal(${item.id}, 1)">+</button>
+          <button class="btn-remover" onclick="removerItemModal(${item.id})">X</button>
+        </div>
+      `;
+      listaProdutosModal.appendChild(div);
+    });
+
+    valorTotalEl.textContent = totalPreco.toFixed(2).replace(".", ",");
+  }
+
+  window.alterarQtdModal = function(id, delta) {
+    atualizarQuantidadeProduto(id, delta);
+  };
+
+  window.removerItemModal = function(id) {
+    carrinho = carrinho.filter(item => item.id !== id);
+    sincronizarInterface();
+  };
+
+  btnAbrirModal.addEventListener("click", () => {
+    renderizarModalCarrinho();
+    passoCarrinho.classList.remove("oculto");
+    passoPagamento.classList.add("oculto");
+    passoSucesso.classList.add("oculto");
+    modal.classList.remove("oculto");
+    resetarFluxoPagamento();
+  });
+
+  btnFechar.addEventListener("click", () => {
+    modal.classList.add("oculto");
+    resetarFluxoPagamento();
+  });
+
+  btnConfirmar.addEventListener("click", () => {
+    if (carrinho.length === 0) {
+      alert("Adicione pelo menos um item do cardápio antes de confirmar!");
+      return;
+    }
+    passoCarrinho.classList.add("oculto");
+    passoPagamento.classList.remove("oculto");
+    resetarFluxoPagamento();
+  });
+
+  btnVoltar.addEventListener("click", () => {
+    passoPagamento.classList.add("oculto");
+    passoCarrinho.classList.remove("oculto");
+    resetarFluxoPagamento();
+  });
+
+  radiosPagamento.forEach(radio => {
+    radio.addEventListener("change", (e) => {
+      formaEscolhida = e.target.value;
+      btnFinalizar.classList.remove("oculto");
+    });
+  });
+
+  btnFinalizar.addEventListener("click", () => {
+    passoPagamento.classList.add("oculto");
+    passoSucesso.classList.remove("oculto");
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    if (formaEscolhida === "pix") {
+      conteudoSucesso.innerHTML = `
+        <h2>Pagamento via Pix</h2>
+        <div class="area-pix" style="margin-top: 10px;">
+          <p>Aponte a câmera do seu celular para esse QR Code ou clique em "Copiar código" e cole no seu banco para efetuar o pagamento.</p>
+          <div class="qr-falso">
+            <svg viewBox="0 0 24 24" width="100" height="100" fill="#1e293b">
+              <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14 2h2v2h-2v-2zm-4-4h2v2h-2v-2zm4 0h2v2h-2v-2zm2 4h2v2h-2v-2zm-2 2h2v2h-2v-2zm2 2h2v2h-2v-2z"/>
+            </svg>
+          </div>
+          <div class="timer-pix" id="timer-display">Tempo restante: 05:00</div>
+          <div class="input-copia-container">
+            <input type="text" id="codigo-pix" value="00020126580014br.gov.bcb.pix0136sashiminoku-pagamento-pedido-online" readonly>
+            <button class="btn-copiar" id="btn-copiar">Copiar código</button>
+          </div>
+        </div>
+      `;
+
+      iniciarTimer(300);
+
+      document.getElementById("btn-copiar").addEventListener("click", () => {
+        const inputPix = document.getElementById("codigo-pix");
+        inputPix.select();
+        navigator.clipboard.writeText(inputPix.value);
+        alert("Código Pix copiado com sucesso!");
+      });
+
+    } else if (formaEscolhida === "credito" || formaEscolhida === "debito") {
+      const nomeCartao = formaEscolhida === "credito" ? "Cartão de Crédito" : "Cartão de Débito";
+      conteudoSucesso.innerHTML = `
+        <h2>${nomeCartao}</h2>
+        <div class="form-cartao" style="margin-top: 10px;">
+          <p style="font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 4px;">Preencha os dados para concluir:</p>
+          <input type="text" placeholder="Número do Cartão (ex: 0000 0000 0000 0000)" maxlength="19">
+          <input type="text" placeholder="Nome impresso no Cartão">
+          <div style="display: flex; gap: 8px;">
+            <input type="text" placeholder="MM/AA" maxlength="5">
+            <input type="text" placeholder="CVV" maxlength="4">
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  btnFecharFinal.addEventListener("click", () => {
+    alert("Pedido enviado para a cozinha! Obrigado por comprar no Sashimi Noku.");
+    carrinho = [];
+    sincronizarInterface();
+    modal.classList.add("oculto");
+    resetarFluxoPagamento();
+  });
+
+  function resetarFluxoPagamento() {
+    radiosPagamento.forEach(el => el.checked = false);
+    btnFinalizar.classList.add("oculto");
+    formaEscolhida = "";
+    conteudoSucesso.innerHTML = "";
+    if (timerInterval) clearInterval(timerInterval);
+  }
+
+  function iniciarTimer(duracaoSegundos) {
+    let tempo = duracaoSegundos;
+    const display = document.getElementById("timer-display");
+    
+    timerInterval = setInterval(() => {
+      let minutos = Math.floor(tempo / 60);
+      let segundos = tempo % 60;
+
+      minutos = minutos < 10 ? "0" + minutos : minutos;
+      segundos = segundos < 10 ? "0" + segundos : segundos;
+
+      if (display) {
+        display.textContent = `Tempo restante: ${minutos}:${segundos}`;
+      }
+
+      if (--tempo < 0) {
+        clearInterval(timerInterval);
+        if (display) display.textContent = "QR Code expirado!";
+      }
+    }, 1000);
+  }
 });
