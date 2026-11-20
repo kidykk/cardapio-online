@@ -28,15 +28,7 @@ Evitar editar o mesmo arquivo simultaneamente para reduzir conflitos.
 
 <!-- PRÓXIMAS ETAPAS! -->
 
-Atualização automática da quantidade no carrinho.
-
-Cadastro dos demais produtos.
-
-Cálculo automático do valor do pedido.
-
-Página do carrinho.
-
-Confirmação do pedido.
+Deixar botões de "ADICIONAR" funcionais
 
 Sistema de cadastro e login.
 

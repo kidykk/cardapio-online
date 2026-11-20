@@ -86,9 +86,11 @@ main {
 /* Área que organiza os botões de compra */
 .quantidade-produto {
     width: 100%;
-    margin-top: 15px;
+    margin-top: auto;
     display: flex;
     justify-content: center;
+    padding-top: 15px;
+    border-top: 1px solid #3a3a3a;
 }
 
 /* Botão inicial de adicionar ao carrinho */
@@ -101,11 +103,34 @@ main {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.2s ease;
+    width: 100%;
+    max-width: 280px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.botao-adicionar:hover {
+    background-color: #e07b1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242, 140, 40, 0.25);
+}
+
+.botao-adicionar:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+.botao-adicionar:active {
+    transform: scale(0.97);
 }
 
 /* Organização dos três controles de quantidade */
 .controles-quantidade {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -447,3 +472,94 @@ main {
 .form-cartao input:focus {
   border-color: #10b981;
 }
+
+
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+@media (max-width: 600px) {
+  main {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  header {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+}
+
+
+/* ===== IDENTIDADE VISUAL SASHIMI NOKU ===== */
+
+/* Cabeçalho */
+header .informacoes {
+    max-width: 950px;
+}
+
+header .informacoes p {
+    color: #D1D1D1;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0 0;
+}
+
+/* Título do cardápio */
+main h2 {
+    grid-column: 1 / -1;
+    font-size: 28px;
+    margin: 0 0 5px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #555;
+}
+
+/* Cartões dos produtos */
+.produto {
+    background-color: #252525;
+    border: 1px solid #444;
+    border-radius: 14px;
+    padding: 20px;
+    transition: 0.25s ease;
+}
+
+.produto:hover {
+    border-color: #F28C28;
+    transform: translateY(-4px);
+}
+
+/* Imagens */
+.imagem-produto {
+    width: 100%;
+}
+
+.imagem-produto img {
+    width: 100%;
+    max-width: 250px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Informações */
+.informacoes-produto h3 {
+    color: #F3F3F3;
+    font-size: 19px;
+    margin: 18px 0;
+}
+
+/* Preços */
+.informacoes-produto p:last-child {
+    color: #F28C28;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+
