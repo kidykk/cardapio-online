@@ -82,19 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const spanQtd = document.getElementById(`quantidade-${prod.id}`);
       if (spanQtd) spanQtd.textContent = qtdAtual;
 
-      if (prod.id === 1) {
-        const btnAdd1 = document.getElementById("adicionar-1");
-        const controles1 = document.getElementById("controles-1");
-        if (btnAdd1 && controles1) {
-          if (qtdAtual > 0) {
-            btnAdd1.style.display = "none";
-            controles1.style.display = "inline-flex";
-          } else {
-            btnAdd1.style.display = "inline-flex";
-            controles1.style.display = "none";
-          }
-        }
-      }
+      const btnAdd = document.getElementById(`adicionar-${prod.id}`);
+   const controles = document.getElementById(`controles-${prod.id}`);
+   if (btnAdd && controles) {
+     if (qtdAtual > 0) {
+       btnAdd.style.display = "none";
+       controles.style.display = "inline-flex";
+     } else {
+       btnAdd.style.display = "inline-flex";
+       controles.style.display = "none";
+     }
+   }
     });
 
     const totalItens = carrinho.reduce((acc, item) => acc + item.qtd, 0);
