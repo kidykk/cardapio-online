@@ -17,9 +17,9 @@ p {
 
 header {
     background-color: #252525;
-    border-bottom: 1px solid #444;
+    border-bottom: 2px solid #F28C28;
     padding: 20px 40px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -562,3 +562,278 @@ main h2 {
 }
 
 
+/* ===== AJUSTE VISUAL DOS CONTROLES DE COMPRA ===== */
+
+.controles-quantidade {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.botao-quantidade {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #F28C28;
+    border-radius: 10px;
+    background-color: #F28C28;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.botao-quantidade:hover {
+    background-color: #FFFFFF;
+    color: #F28C28;
+    transform: scale(1.05);
+}
+
+.controles-quantidade span {
+    min-width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    color: #F28C28;
+    border: 1px solid #F28C28;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ===== DESCRIÇÃO DOS PRODUTOS ===== */
+
+.informacoes-produto p {
+    line-height: 1.5;
+}
+
+.informacoes-produto p:not(:last-child) {
+    color: #777777;
+    font-size: 14px;
+    min-height: 42px;
+    margin-top: 8px;
+}
+
+.informacoes-produto p:last-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F28C28;
+    margin-top: 12px;
+}
+
+/* ===== ACABAMENTO DOS CARDS ===== */
+
+.produto {
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.produto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.produto img {
+    transition: transform 0.3s ease;
+}
+
+.produto:hover img {
+    transform: scale(1.04);
+}
+
+/* ===== ESPAÇAMENTO DOS PRODUTOS ===== */
+
+.informacoes-produto {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.informacoes-produto h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.informacoes-produto .botao-adicionar,
+.informacoes-produto .controles-quantidade {
+    margin-top: 14px;
+}
+
+/* ===== BOTÃO ADICIONAR ===== */
+
+.botao-adicionar {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #F28C28;
+    border-radius: 10px;
+    background-color: #F28C28;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.botao-adicionar:hover {
+    background-color: #FFFFFF;
+    color: #F28C28;
+    transform: scale(1.02);
+}
+
+/* ===== TÍTULOS DOS PRODUTOS ===== */
+
+.informacoes-produto h3 {
+    color: #fbf7f7;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* ===== EFEITO AO CLICAR NOS BOTÕES ===== */
+
+.botao-adicionar:active,
+.botao-quantidade:active {
+    transform: scale(0.96);
+}
+
+/* ===== ACABAMENTO DO CABEÇALHO ===== */
+
+header {
+    padding: 20px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ===== DESCRIÇÃO DO RESTAURANTE ===== */
+
+header .informacoes {
+    max-width: 850px;
+}
+
+.descricao-restaurante {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-left: 3px solid #F28C28;
+    background-color: #2D2D2D;
+    border-radius: 0 8px 8px 0;
+}
+
+.subtitulo-restaurante {
+    display: block;
+    color: #F28C28;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 7px;
+}
+
+header .informacoes .descricao-restaurante p {
+    color: #D1D1D1;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* ===== TELA DE CADASTRO ===== */
+
+.pagina-cadastro {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cartao-cadastro {
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    box-sizing: border-box;
+    background-color: #252525;
+    border: 1px solid #444;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.cartao-cadastro h1 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.texto-cadastro {
+    font-size: 14px;
+    color: #D1D1D1;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.cartao-cadastro form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+}
+
+.cartao-cadastro label {
+    color: #E8E8E8;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cartao-cadastro input {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: #373634;
+    color: white;
+    outline: none;
+}
+
+.cartao-cadastro input:focus {
+    border-color: #F28C28;
+}
+
+.cartao-cadastro button {
+    padding: 13px;
+    margin-top: 10px;
+    background-color: #F28C28;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cartao-cadastro button:hover {
+    background-color: #e07b1c;
+}
+
+.cartao-cadastro a {
+    display: inline-block;
+    margin-top: 22px;
+    color: #F28C28;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.mensagem-cadastro {
+    color: #F28C28;
+    font-size: 14px;
+}

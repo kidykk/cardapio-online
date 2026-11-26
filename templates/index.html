@@ -11,12 +11,36 @@
     <header>
     <div class="informacoes">
     
-        <h1>SASHIMI NOKU</h1>
+        <h1>
+    <span style="color: white;">SASHIMI</span>
+    <span style="color: #F28C28;">NOKU</span>
+</h1>
     
-        <p>Um autêntico restaurante japonês combina a delicadeza da culinária oriental com um ambiente minimalista e acolhedor. No cardápio, destacam-se sushis, sashimis e temakis sempre frescos, preparados com cortes precisos, além de pratos quentes tradicionais como guiozas e yakisoba, proporcionando uma experiência gastronômica leve e saborosa.</p>   
+        <div class="descricao-restaurante">
+    <span class="subtitulo-restaurante">CULINÁRIA JAPONESA • FRESCOR E TRADIÇÃO</span>
+
+    <p>
+        Uma experiência da culinária japonesa feita para você.
+        No SASHIMI NOKU, tradição e qualidade se encontram em cada prato,
+        com ingredientes selecionados, preparo cuidadoso e sabores
+        que tornam cada pedido especial.
+    </p>
+</div>   
     
     </div>
     
+    <div class="acesso-conta" style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 12px 0;">
+        {% if session.get("usuario_id") %}
+            {% if session.get("usuario_tipo") == "gestor" %}
+                <a href="{{ url_for('area_gestor') }}" style="color: white; background: #F28C28; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-weight: bold;">Área do Gestor</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}" style="color: white; border: 1px solid #F28C28; padding: 10px 14px; border-radius: 8px; text-decoration: none;">Sair da conta</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" style="color: white; background: #F28C28; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-weight: bold;">Entrar</a>
+            <a href="{{ url_for('cadastro') }}" style="color: white; border: 1px solid #F28C28; padding: 10px 14px; border-radius: 8px; text-decoration: none;">Cadastrar</a>
+        {% endif %}
+    </div>
+
     <div class="carrinho">
     <button id="but" class="btn-carrinho-topo">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">

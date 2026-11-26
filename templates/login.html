@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SASHIMI NOKU</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #373634;
+            font-family: Arial, sans-serif;
+            color: white;
+            padding: 20px;
+        }
+
+        .container-login {
+            width: 100%;
+            max-width: 420px;
+            background-color: #252525;
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .descricao {
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .mensagens {
+            color: #ff922b;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .campo {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #555;
+            border-radius: 9px;
+            background-color: #373634;
+            color: white;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #F28C28;
+        }
+
+        .btn-entrar {
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 9px;
+            background-color: #F28C28;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-entrar:hover {
+            background-color: #df7818;
+        }
+
+        .link-cadastro {
+            display: inline-block;
+            margin-top: 22px;
+            color: #ff922b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .link-cadastro:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-login">
+
+        <h1>SASHIMI NOKU</h1>
+
+        <p class="descricao">
+            Entre na sua conta e aproveite nosso cardápio.
+        </p>
+
+        <div class="mensagens">
+            {% with mensagens = get_flashed_messages() %}
+                {% for mensagem in mensagens %}
+                    <p>{{ mensagem }}</p>
+                {% endfor %}
+            {% endwith %}
+        </div>
+
+        <form action="{{ url_for('login') }}" method="POST">
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite sua senha"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-entrar">
+                ENTRAR
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('cadastro') }}" class="link-cadastro">
+            Ainda não tem uma conta? Cadastre-se
+        </a>
+
+        <br>
+
+        <a href="{{ url_for('inicio') }}" class="link-cadastro">
+            Voltar ao cardápio
+        </a>
+
+    </div>
+
+</body>
+</html>
