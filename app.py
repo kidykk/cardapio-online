@@ -379,8 +379,20 @@ def atualizar_produto(produto_id):
 # CRIAÇÃO DAS TABELAS
 # =========================
 
+# Criação automática das tabelas e do gestor padrão
 with app.app_context():
     criar_banco()
+
+    gestor_padrao = Usuario.query.filter_by(tipo="gestor").first()
+    if not gestor_padrao:
+        novo_gestor = Usuario(
+            nome="Gestor Sashimi Noku",
+            email="gestor@sashiminoku.com",
+            senha_hash=generate_password_hash("123456"),
+            tipo="gestor"
+        )
+        db.session.add(novo_gestor)
+        db.session.commit()
 
 
 if __name__ == "__main__":
