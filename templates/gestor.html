@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Gestor | SASHIMI NOKU</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #373634;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #252525;
+            padding: 25px 40px;
+            border-bottom: 2px solid #F28C28;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header span {
+            color: #F28C28;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .boas-vindas {
+            margin-bottom: 35px;
+        }
+
+        .boas-vindas h2 {
+            font-size: 28px;
+        }
+
+        .boas-vindas p {
+            color: #ccc;
+        }
+
+        .painel {
+            background-color: #252525;
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .painel h3 {
+            color: #F28C28;
+            margin-top: 0;
+        }
+
+        .painel p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .acoes {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .acoes a {
+            padding: 12px 20px;
+            background-color: #F28C28;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .acoes a:hover {
+            background-color: #df7818;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>SASHIMI <span>NOKU</span></h1>
+    </header>
+
+    <main>
+
+        <section class="boas-vindas">
+            <h2>Área do Gestor</h2>
+            <p>Bem-vindo ao painel administrativo do SASHIMI NOKU.</p>
+        </section>
+
+        <section class="painel">
+            <h3>Painel de gerenciamento</h3>
+
+            <p>
+                Aqui ficará o ambiente de administração do restaurante,
+                onde será possível acompanhar e gerenciar as operações
+                do SASHIMI NOKU.
+            </p>
+
+            <div class="acoes">
+                <a href="{{ url_for('inicio') }}">Voltar ao cardápio</a>
+                <a href="{{ url_for('logout') }}">Sair da conta</a>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
