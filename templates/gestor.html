@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área do Gestor | SASHIMI NOKU</title>
+    <title>Painel do Estabelecimento | Sashimi Noku</title>
 
     <style>
         * {
@@ -13,80 +13,69 @@
 
         body {
             margin: 0;
-            min-height: 100vh;
-            background-color: #373634;
-            color: white;
+            padding: 25px;
+            background: #202020;
+            color: #fff;
             font-family: Arial, sans-serif;
         }
 
         header {
-            background-color: #252525;
-            padding: 25px 40px;
-            border-bottom: 2px solid #F28C28;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
+        h1, h2 {
+            color: #f28c28;
         }
 
-        header span {
-            color: #F28C28;
+        a, button {
+            background: #f28c28;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        main {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        .boas-vindas {
+        section {
             margin-bottom: 35px;
         }
 
-        .boas-vindas h2 {
-            font-size: 28px;
+        .pedido, .produto {
+            background: #303030;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
-        .boas-vindas p {
-            color: #ccc;
+        input, select {
+            padding: 9px;
+            margin: 5px 5px 5px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background: #fff;
+            color: #222;
+            max-width: 100%;
         }
 
-        .painel {
-            background-color: #252525;
-            border: 1px solid #444;
-            border-radius: 12px;
-            padding: 25px;
-        }
-
-        .painel h3 {
-            color: #F28C28;
-            margin-top: 0;
-        }
-
-        .painel p {
+        .detalhes {
             color: #ccc;
             line-height: 1.6;
         }
 
-        .acoes {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
 
-        .acoes a {
-            padding: 12px 20px;
-            background-color: #F28C28;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .acoes a:hover {
-            background-color: #df7818;
+            header {
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -94,32 +83,93 @@
 <body>
 
     <header>
-        <h1>SASHIMI <span>NOKU</span></h1>
+        <div>
+            <h1>SASHIMI NOKU</h1>
+            <p>Painel do estabelecimento</p>
+        </div>
+
+        <div>
+            <a href="/">Ver cardápio</a>
+            <a href="/logout">Sair</a>
+        </div>
     </header>
 
-    <main>
+    <section>
+        <h2>Pedidos recebidos</h2>
 
-        <section class="boas-vindas">
-            <h2>Área do Gestor</h2>
-            <p>Bem-vindo ao painel administrativo do SASHIMI NOKU.</p>
-        </section>
+        {% if pedidos %}
+            {% for pedido in pedidos %}
+                <div class="pedido">
+                    <h3>Pedido #{{ pedido.id }}</h3>
 
-        <section class="painel">
-            <h3>Painel de gerenciamento</h3>
+                    <div class="detalhes">
+                        <p>Cliente: {{ pedido.usuario.nome }}</p>
+                        <p>E-mail: {{ pedido.usuario.email }}</p>
+                        <p>Data: {{ pedido.data.strftime("%d/%m/%Y %H:%M") }}</p>
+                        <p>Pagamento: {{ pedido.forma_pagamento }}</p>
+                        <p>Total: R$ {{ "%.2f"|format(pedido.total) }}</p>
 
-            <p>
-                Aqui ficará o ambiente de administração do restaurante,
-                onde será possível acompanhar e gerenciar as operações
-                do SASHIMI NOKU.
-            </p>
+                        <strong>Itens:</strong>
+                        <ul>
+                            {% for item in pedido.itens %}
+                                <li>
+                                    {{ item.nome_produto }} —
+                                    {{ item.quantidade }} unidade(s)
+                                </li>
+                            {% endfor %}
+                        </ul>
 
-            <div class="acoes">
-                <a href="{{ url_for('inicio') }}">Voltar ao cardápio</a>
-                <a href="{{ url_for('logout') }}">Sair da conta</a>
+                        <p>Status atual: {{ pedido.status }}</p>
+                    </div>
+
+                    <form action="/gestor/pedido/{{ pedido.id }}" method="POST">
+                        <label for="status-{{ pedido.id }}">Atualizar pedido:</label>
+
+                        <select name="status" id="status-{{ pedido.id }}">
+                            <option value="Recebido" {% if pedido.status == "Recebido" %}selected{% endif %}>Recebido</option>
+                            <option value="Em preparo" {% if pedido.status == "Em preparo" %}selected{% endif %}>Em preparo</option>
+                            <option value="Concluído" {% if pedido.status == "Concluído" %}selected{% endif %}>Concluído</option>
+                            <option value="Cancelado" {% if pedido.status == "Cancelado" %}selected{% endif %}>Cancelado</option>
+                        </select>
+
+                        <button type="submit">Salvar status</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum pedido registrado.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Gerenciar produtos</h2>
+
+        {% for produto in produtos %}
+            <div class="produto">
+                <form action="/gestor/produto/{{ produto.id }}" method="POST">
+                    <input
+                        type="text"
+                        name="nome"
+                        value="{{ produto.nome }}"
+                        required
+                        aria-label="Nome do produto"
+                    >
+
+                    <input
+                        type="number"
+                        name="preco"
+                        value="{{ produto.preco }}"
+                        min="0.01"
+                        step="0.01"
+                        required
+                        aria-label="Preço do produto"
+                    >
+
+                    <button type="submit">Atualizar produto</button>
+                </form>
             </div>
-        </section>
-
-    </main>
+        {% endfor %}
+    </section>
 
 </body>
 </html>

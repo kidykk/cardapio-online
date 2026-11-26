@@ -232,13 +232,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  btnFecharFinal.addEventListener("click", () => {
-    alert("Pedido enviado para a cozinha! Obrigado por comprar no Sashimi Noku.");
-    carrinho = [];
-    sincronizarInterface();
-    modal.classList.add("oculto");
-    resetarFluxoPagamento();
-  });
+  btnFecharFinal.addEventListener("click", async () => {
+
+    if (!formaEscolhida || carrinho.length === 0) {
+        alert("Selecione uma forma de pagamento e adicione produtos.");
+        return;
+    }
+
+    try {
+        const resposta = await fetch("/api/pedidos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                pagamento: formaEscolhida,
+                itens: carrinho.map(item => ({
+                    id: item.id,
+                    qtd: item.qtd
+                }))
+            })
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            alert(resultado.mensagem || "Não foi possível registrar o pedido.");
+            return;
+        }
+
+        alert("Pedido #" + resultado.pedido_id + " registrado com sucesso!");
+
+        carrinho = [];
+        sincronizarInterface();
+        modal.classList.add("oculto");
+        resetarFluxoPagamento();
+
+    } catch (erro) {
+        alert("Erro ao enviar o pedido. Verifique sua conexão e tente novamente.");
+    }
+});
 
   function resetarFluxoPagamento() {
     radiosPagamento.forEach(el => el.checked = false);
