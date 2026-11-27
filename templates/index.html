@@ -13,7 +13,7 @@
     
         <h1>
     <span style="color: white;">SASHIMI</span>
-    <span style="color: #F28C28;">NOKU</span>
+    <span style="color: #F28C28;">CWB</span>
 </h1>
     
         <div class="descricao-restaurante">
@@ -21,7 +21,7 @@
 
     <p>
         Uma experiência da culinária japonesa feita para você.
-        No SASHIMI NOKU, tradição e qualidade se encontram em cada prato,
+        No SASHIMI CWB, tradição e qualidade se encontram em cada prato,
         com ingredientes selecionados, preparo cuidadoso e sabores
         que tornam cada pedido especial.
     </p>
@@ -56,14 +56,14 @@
 
     <h2>Nosso Cardápio</h2>
 
-    <!-- Produto 1: Barca Noku -->
+    <!-- Produto 1: Barca CWB -->
     <div class="produto">
         <div class="imagem-produto">
             <img src="{{ url_for('static', filename='img/barca-noku.jpg') }}" alt="Barca Noku">
         </div>
 
         <div class="informacoes-produto">
-            <h3>BARCA NOKU</h3>
+            <h3>{{ produtos[0].nome }}</h3>
             <p>Seleção de sushi e sashimi frescos, ideal para 2 pessoas.</p>
             <p>R$ {{ "%.2f"|format(produtos[0].preco)|replace(".", ",") }}</p>
         </div>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>COMBINADO TRADICIONAL</h3>
+            <h3>{{ produtos[1].nome }}</h3>
             <p>Seleção tradicional de sushi e sashimi.</p>
             <p>R$ {{ "%.2f"|format(produtos[1].preco)|replace(".", ",") }}</p>
         </div>
@@ -116,7 +116,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>SASHIMI DE SALMÃO</h3>
+            <h3>{{ produtos[2].nome }}</h3>
             <p>Fatias frescas de salmão, preparadas cuidadosamente.</p>
             <p>R$ {{ "%.2f"|format(produtos[2].preco)|replace(".", ",") }}</p>
         </div>
@@ -140,7 +140,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>TEMAKI DE SALMÃO</h3>
+            <h3>{{ produtos[3].nome }}</h3>
             <p>Temaki recheado com salmão e ingredientes frescos.</p>
             <p>R$ {{ "%.2f"|format(produtos[3].preco)|replace(".", ",") }}</p>
         </div>
@@ -164,7 +164,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>HOT ROLL PHILADELPHIA</h3>
+            <h3>{{ produtos[4].nome }}</h3>
             <p>Enrolado empanado e crocante com recheio especial.</p>
             <p>R$ {{ "%.2f"|format(produtos[4].preco)|replace(".", ",") }}</p>
         </div>
@@ -188,7 +188,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>URAMAKI CALIFÓRNIA</h3>
+            <h3>{{ produtos[5].nome }}</h3>
             <p>Uramaki com combinação de ingredientes tradicionais.</p>
             <p>R$ {{ "%.2f"|format(produtos[5].preco)|replace(".", ",") }}</p>
         </div>
@@ -212,7 +212,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>NIGIRI DE ATUM</h3>
+            <h3>{{ produtos[6].nome }}</h3>
             <p>Fatia de atum fresco sobre arroz japonês temperado.</p>
             <p>R$ {{ "%.2f"|format(produtos[6].preco)|replace(".", ",") }}</p>
         </div>
@@ -236,7 +236,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>GYOZA DE PORCO</h3>
+            <h3>{{ produtos[7].nome }}</h3>
             <p>Pastéis japoneses recheados com carne suína.</p>
             <p>R$ {{ "%.2f"|format(produtos[7].preco)|replace(".", ",") }}</p>
         </div>
@@ -260,7 +260,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>TEMPURA DE CAMARÃO</h3>
+            <h3>{{ produtos[8].nome }}</h3>
             <p>Camarões empanados em uma massa leve e crocante.</p>
             <p>R$ {{ "%.2f"|format(produtos[8].preco)|replace(".", ",") }}</p>
         </div>
@@ -284,7 +284,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>YAKISSOBA DE FRANGO</h3>
+            <h3>{{ produtos[9].nome }}</h3>
             <p>Macarrão oriental com frango e legumes ao molho especial.</p>
             <p>R$ {{ "%.2f"|format(produtos[9].preco)|replace(".", ",") }}</p>
         </div>
@@ -308,7 +308,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>LAMEN SHOYU</h3>
+            <h3>{{ produtos[10].nome }}</h3>
             <p>Macarrão japonês servido em caldo à base de shoyu.</p>
             <p>R$ {{ "%.2f"|format(produtos[10].preco)|replace(".", ",") }}</p>
         </div>
@@ -332,7 +332,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>MISSOSHIRO</h3>
+            <h3>{{ produtos[11].nome }}</h3>
             <p>Sopa japonesa tradicional à base de missô.</p>
             <p>R$ {{ "%.2f"|format(produtos[11].preco)|replace(".", ",") }}</p>
         </div>
@@ -356,7 +356,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>NIGIRI DE SALMÃO</h3>
+            <h3>{{ produtos[12].nome }}</h3>
             <p>Fatia de salmão fresco sobre arroz japonês temperado.</p>
             <p>R$ {{ "%.2f"|format(produtos[12].preco)|replace(".", ",") }}</p>
         </div>
@@ -380,7 +380,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>SHIMEJI NA MANTEIGA</h3>
+            <h3>{{ produtos[13].nome }}</h3>
             <p>Cogumelos shimeji preparados na manteiga.</p>
             <p>R$ {{ "%.2f"|format(produtos[13].preco)|replace(".", ",") }}</p>
         </div>
@@ -404,7 +404,7 @@
         </div>
 
         <div class="informacoes-produto">
-            <h3>MOCHI DE CHÁ VERDE</h3>
+            <h3>{{ produtos[14].nome }}</h3>
             <p>Doce japonês tradicional com sabor de chá verde.</p>
             <p>R$ {{ "%.2f"|format(produtos[14].preco)|replace(".", ",") }}</p>
         </div>
